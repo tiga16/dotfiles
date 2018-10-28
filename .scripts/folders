@@ -1,0 +1,27 @@
+# You can add comments to these files with #
+h	~/
+# Documents
+dD	~/Documents
+dS	~/Documents/Schule
+dPP	~/Documents/Projekte_u.A.
+dPp	~/Documents/Projekte_u.A./Processing
+dPc	~/Documents/Projekte_u.A./cpp
+dPv	~/Documents/Projekte_u.A./VirtualBox
+dPMathe	~/Documents/Projekte_u.A./Mathe
+dB	~/Documents/Buecher
+df	~/Documents/FRIENDS
+# Downloads 
+DD	~/Downloads
+Dg	~/Downloads/git
+pp	~/Pictures
+pw	~/Pictures/Wallpaper
+m	~/Musik
+s	~/.scripts
+Cf	~/CONFIGS
+cf	~/.config
+#mounts
+M /mnt
+mm ~/mnt
+mu ~/mnt/usb
+mh ~/mnt/hdd
+ms ~/mnt/SD

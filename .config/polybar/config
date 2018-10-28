@@ -1,0 +1,118 @@
+[bar/top]
+width=100%
+height = 22
+bottom=false
+fixed-center=false
+
+background =#0a2929
+foreground =#ffffff
+
+;underline-size=1
+;underline-color=#ffff00
+
+padding-left=1
+padding-right=1
+module-margin=1
+
+font-0 = dina:size=15    
+font-1 = FontAwesome:size=11
+font-2 = FontAwesome5Free:style=Solid:pixelsize=10:antialias=false;3 
+font-3 = FontAwesome5Brands:style=Solid:pixelsize=10:antialias=false;3
+
+modules-left = i3
+modules-center =
+modules-right = volume wifi weather battery date
+
+wm-name = "i3"
+
+locale = de_DE.UTF-8
+
+;tray-position=center
+;tray-detached=true
+;tray-maxsize=40
+;tray-transparent=true
+;tray-background = #404040
+;tray-padding = 0
+;tray-offset-x = 0
+;tray-offset-y = 0
+;tray-scale = 1.0
+
+;wm-restack=i3
+
+enable-ipc = false
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+
+screenchange-reload = false
+
+;compositing-background = source
+;compositing-foreground = over
+;compositing-overline = over
+;compositing-underline = over
+;compositing-border = over
+;
+;format-foreground = 
+;format-background = 
+;format-underline =
+;format-overline =
+;format-spacing =
+;format-padding =
+;format-margin =
+;format-offset =
+;
+;; modules ;;
+
+[module/date]
+type=internal/date
+interval=1.0
+date=%d|%m|%y
+time=%R
+format=<label>
+label=  %date% %time% 
+label-font=0
+label-foreground = #9Af4B0
+
+[module/i3]
+type=internal/i3
+pin-workspaces=true
+strip-wsnumbers=true
+ws-icon-0 = 1:work;>_
+ws-icon-1 = 2:work2;>_
+ws-icon-2 = 3:pacman; 
+ws-icon-3 = 4:web;
+ws-icon-4 = 5:rnd;
+
+format = <label-state> <label-mode>
+
+label= %icon%
+label-focused= %icon%
+label-unfocused= %icon%
+label-focused-background = #88000000
+label-focused-underline= #ddd
+label-focused-padding = 2
+label-unfocused-padding = 2
+label-font=3
+
+[module/wifi]
+type=custom/script
+exec=i3wifi
+interval=5
+label-foreground=#ccff33
+
+[module/weather]
+type=custom/script
+exec=i3weather
+interval=450
+
+[module/volume]
+type=custom/script
+exec=i3volume
+interval=0.3
+
+[module/battery]
+type=custom/script
+exec=i3battery
+interval=2

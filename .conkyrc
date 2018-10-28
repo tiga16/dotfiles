@@ -1,0 +1,88 @@
+conky.config = {
+	background = false,
+	update_interval = 0.5,
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+	out_to_console = false,
+	override_utf8_locale = true,
+	double_buffer = true,
+	no_buffers = true,
+	text_buffer_size = 32768,
+	imlib_cache_size = 0,
+	own_window = true,
+	own_window_transparent = true,
+	own_window_type = 'normal',
+	border_inner_margin = 10,
+	border_outer_margin = 0,
+	xinerama_head = 2,
+	alignment = 'top_left',
+	gap_x = 5,
+	gap_y = 60,
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+	use_xft = true,
+	font = 'Ubuntu Mono:size=13',
+	xftalpha = 0.8,
+	uppercase = false,
+	default_color = '#FFFFFF',
+	own_window_colour = '#000000',
+	minimum_width = 0, minimum_height = 0,
+};
+conky.text = [[
+	${color #FF1A21}${font Conky Icons by Carelli:size=14}s ${font Ubuntu Mono:size=14}${nodename} $machine ${color}${goto 230}${font FontAwesome}${font}${voffset -2} ${time %d/%m/%y}   ${font FontAwesome}${font}${voffset -2} ${time %H:%M}
+	${voffset 3}${color #FF1A21}Uptime:${goto 100}${color}${uptime}\
+	${goto 220}${color #FF1A21}Threads/Processes:$color${alignr}$threads/$processes${voffset 0}
+	#${if_match ${battery_percent BAT1} <= 10}\
+	#	${goto 20}${color #FF1A21}${blink Battery:} \
+	#$else \
+	#	${goto 20}${color #FF1A21}Battery: \
+	#$endif\
+	${goto 102}${color}${voffset 2}${battery_bar 7,80 BAT1} ${voffset -1}${goto 200}${battery BAT1}${alignr}${battery_time BAT1}
+	${goto 20}${color #FF1A21}Arch Linux x86_64${font}${alignr}${color}${kernel}
+	${hr}
+	${if_up wlp4s0}\
+	${goto 20}${font Conky Icons by Carelli}E${font} WLAN  channel: ${wireless_channel wlp4s0}, freq: ${wireless_freq wlp4s0}
+	${goto 20}${font FontAwesome}${font}${voffset 0} ${addrs wlp4s0} MAC ADDR: ${wireless_ap wlp4s0}
+	${goto 20}${upspeedgraph wlp4s0 30,250 00ffff 00ff00}${goto 202}${downspeedgraph wlp4s0 30,175 FFFF00 DD3A21}
+	${font FontAwesome}${goto 20}${font} ${upspeed wlp4s0}${font FontAwesome}${goto 202}${font} ${downspeed wlp4s0}
+	${hr}
+	$endif\
+	${goto 20}${font FontAwesome}${font} ${color #00FF00}Root Drive ${color} 
+	${goto 20}/${goto  150}${fs_bar 7,100 /}      ${fs_used /}/${fs_size /}
+	#Example	#${if_mounted /media/ajit/AC8E516D8E5130D6} \
+			#${goto 20}Windows${goto  150}${fs_bar 7,100 /media/ajit/AC8E516D8E5130D6}      ${fs_used /media/ajit/AC8E516D8E5130D6}/${fs_size /media/ajit/AC8E516D8E5130D6}
+			#$endif\
+	${goto 20}${diskiograph_read 30,178 06E9F8 2104FA}${goto 202}${diskiograph_write 30,175 FFFF00 DD3A21}
+	${font FontAwesome}${goto 20}${font} ${diskio_read}${font FontAwesome}${goto 202}${font} ${diskio_write}
+	${hr}
+	${font FontAwesome}${font}${voffset -2} ${mem}/${memmax} (${memperc}%) | Swap: ${swapperc}%
+	${goto 50}${memgraph 30,355 FF0500 00735B -l }
+	${hr}
+	${goto 20}${font Conky Icons by Carelli}A ${font}${color #00FF00}Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz 
+	    ${cpubar 10,387 cpu0}
+	${color #FFFF00}Core Temperature:		${color}${hwmon 1 temp 1}°C   
+	${goto 20}CPU1: ${goto 70} ${cpu cpu1}%${goto 130}${freq_g 1}GHz${goto 215} | CPU5: ${goto 295}${cpu cpu5}%${goto 355}${freq_g 5}GHz 
+	${goto 20}CPU2: ${goto 70} ${cpu cpu2}%${goto 130}${freq_g 2}GHz${goto 215} | CPU6: ${goto 295}${cpu cpu6}%${goto 355}${freq_g 6}GHz 
+	${goto 20}CPU3: ${goto 70} ${cpu cpu3}%${goto 130}${freq_g 3}GHz${goto 215} | CPU7: ${goto 295}${cpu cpu7}%${goto 355}${freq_g 7}GHz
+        ${goto 20}CPU4: ${goto 70} ${cpu cpu4}%${goto 130}${freq_g 4}GHz${goto 215} | CPU8: ${goto 295}${cpu cpu8}%${goto 355}${freq_g 8}GHz
+
+	${hr}
+	# ${color #FFFF00}HDDs		${color}${hddtemp /dev/sda}
+	${goto 20}${color #FFFF00}GPU 		${color}${hwmon 0 temp 1}°C    \
+	${color #FFFF00}     ${color #FFFF00}ACPI ${color}${acpitemp}°C
+	${hr}
+	${color #FFFF00}${goto 20}Name ${goto 200}Pid${goto 255}Cpu%${goto 310}Mem%${color}
+	${goto 20}${top name 1} ${goto 180}${top pid 1}${goto 235}${top cpu 1}${goto 290}${top mem 1}
+	${goto 20}${top name 2} ${goto 180}${top pid 2}${goto 235}${top cpu 2}${goto 290}${top mem 2}
+	${goto 20}${top name 3} ${goto 180}${top pid 3}${goto 235}${top cpu 3}${goto 290}${top mem 3}
+	${goto 20}${top name 4} ${goto 180}${top pid 4}${goto 235}${top cpu 4}${goto 290}${top mem 4}
+	${goto 20}${top name 5} ${goto 180}${top pid 5}${goto 235}${top cpu 5}${goto 290}${top mem 5}
+	${goto 20}${top name 6} ${goto 180}${top pid 6}${goto 235}${top cpu 6}${goto 290}${top mem 6}
+ 	${goto 20}${top name 7} ${goto 180}${top pid 7}${goto 235}${top cpu 7}${goto 290}${top mem 7}
+ 	${goto 20}${top name 8} ${goto 180}${top pid 8}${goto 235}${top cpu 8}${goto 290}${top mem 8}
+ 	${goto 20}${top name 9} ${goto 180}${top pid 9}${goto 235}${top cpu 9}${goto 290}${top mem 9}
+ 	${goto 20}${top name 10} ${goto 180}${top pid 10}${goto 235}${top cpu 10}${goto 290}${top mem 10}
+
+]];

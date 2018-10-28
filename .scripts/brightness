@@ -1,0 +1,41 @@
+
+Current=$(cat /sys/class/backlight/intel_backlight/brightness)
+Max=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+
+if [[ -z "$1" ]];then
+	echo "The current brightness is "$Current"."
+elif [[ ($(echo $1 | grep "^-\?[0-9]*$") == "") && (-z "$2") ]];then
+	if [[ ($1=="m") || ($1 == "max") ]];then
+		echo $Max > /sys/class/backlight/intel_backlight/brightness
+	else
+		echo "Please give a valid arrgumetnt like m for max."
+	fi
+elif [[ ($(echo $1 | grep "^-\?[0-9]*$") != "") || ($(echo $2 | grep "^-\?[0-9]*$") == "") ]];then #check if given values are the correct type
+	echo "Please give valid arguments and options like i 100 for increase 100 or s for set."
+else
+	if [[ ($1 == "s") || ($1 == "set") ]]; then
+		if [[ $2 -ge 417 ]];then
+			echo "The value exceeds the brightness maximum. The maximum is "$Max"."
+		else
+			echo $2 > /sys/class/backlight/intel_backlight/brightness
+		fi
+	elif [[ ($1=="i") || ($1 == "increase") ]];then
+		if [[ ($(($2+$Current)) -ge 417)||($(($2+$Current)) -lt 0) ]];then
+			echo "The value exceeds the brightness limits. The maximum is "$Max"."
+		else
+			echo $(($2+$Current)) > /sys/class/backlight/intel_backlight/brightness
+		fi
+	elif [[ ($1=="d") || ($1 == "decrease") ]];then
+		if [[ ($(($Current-$2)) -ge 417)||($(($Current-$2)) -le 0) ]];then
+			echo "The value exceeds the brightness limits. The maximum is "$Max"."
+		else
+			echo "foo"
+		fi
+	else
+		echo "Please give valid arguments and options like i 100 for increase 100 or s for set."
+	fi
+fi
+
+
+#echo $Max"hallo"$Current
+#echo $New > /sys/class/backlight/intel_backlight/brightness

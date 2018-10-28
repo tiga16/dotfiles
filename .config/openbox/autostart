@@ -1,0 +1,4 @@
+setxkbmap -layout de -option caps:escape&
+tint2 &
+feh  --randomize --bg-fill /home/ssnape/Pictures/Wallpaper/ &
+xcompmgr &

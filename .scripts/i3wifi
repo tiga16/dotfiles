@@ -1,0 +1,36 @@
+
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	1) nm-connection-editor ;;
+	2) st -e nmtui ;;
+esac
+
+INTERFACE="${BLOCK_INSTANCE:-wlan0}"
+
+[[ "$(cat /sys/class/net/wlp4s0/operstate)" = 'down' ]] && echo 📡 && exit
+
+QUALITY=$(grep wlp4s0  /proc/net/wireless | awk '{print int($3 * 100 / 70) }')
+
+if [[ "$(nmcli|awk '/wlp4s0/ {print $2;}'|sed s/wlp4s0//)" = "connected" ]]; then
+	if [[ "$(nmcli|awk '/enp3s0/ {print $2;}'|sed s/enp3s0//)" = "connected" ]]; then	
+		WLAN=" : "$(nmcli|awk '/enp3s0/ {print $4" "$5}'|sed s/enp3s0//)" : "  
+	else
+		WLAN=" : "$(nmcli|awk '/wlp4s0/ {print $4" "$5}'|sed s/wlp4s0//)" : " 
+	fi
+else
+	WLAN = ' : Wildniss : '
+fi
+
+echo $(dig +short myip.opendns.com @resolver1.opendns.com)" : "$(ifconfig|awk '/inet 192/ {print $2}')""$WLAN"" $QUALITY%
+
+# color
+#if [[ $QUALITY -ge 70 ]]; then
+    #echo "#00FF00"
+#elif [[ $QUALITY -lt 70 ]]; then
+    #echo "#FFF600"
+#elif [[ $QUALITY -lt 50 ]]; then
+    #echo "#FFAE00"
+#elif [[ $QUALITY -lt 40 ]]; then
+    #echo "#FF0000"
+#fi

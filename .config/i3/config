@@ -1,0 +1,185 @@
+
+
+	### -0- FONT / mod
+	
+set $mod Mod4
+set $modb Mod1 
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+#font pango:monospace 10
+
+#font pango:DejaVu Sans Mono 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+#qutebrowser
+assign [class="Firefox"] 4:web
+
+#R calc
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move scratchpad
+for_window [instance="math"] border pixel 2
+
+	### -1- KEYBINDINGS  
+
+#e start stuff
+bindsym $mod+Return exec st 
+bindsym $mod+q exec firefox
+bindsym $mod+Shift+q exec tor-browser
+bindsym $mod+Shift+n exec nm-connection-editor
+bindsym $mod+e exec st -e ranger
+bindsym $mod+c exec st -e cmus # https://music.amazon.de/search/1982
+bindsym $mod+w feh --randomize --bg-fill /home/ssnape/Pictures/Wallpaper/	
+bindsym $mod+d exec dmenu_run
+ 
+#R calc
+bindsym $mod+a [instance="math"] scratchpad show ; [instance="math"] move position center
+
+#lockscreen
+bindsym $modb+q exec /usr/bin/lockscreen 
+
+#volume 
+bindsym $mod+XF86AudioRaiseVolume exec pamixer -i 1 && pkill -RTMIN+10 i3blocks
+bindsym $mod+XF86AudioLowerVolume exec pamixer -d 1 && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec pamixer -i 5 && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec pamixer -d 5 && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute exec pamixer -t && pkill -RTMIN+10 i3blocks
+
+# kill focused window
+bindsym $mod+Shift+c kill
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# change split direction
+bindsym $modb+h split h
+bindsym $modb+v split v
+
+# fullscreen
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $modb+s layout stacking
+bindsym $modb+w layout tabbed
+bindsym $modb+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+	### -3- WORKSPACES 
+
+# workspaces
+set $ws1 "1:work"
+set $ws2 "2:work2"
+set $ws3 "3:pacman"
+set $ws4 "4:web"
+set $ws5 "5:rnd"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+bindsym $mod+minus workspace next
+bindsym $mod+period workspace prev
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+bindsym $mod+Shift+minus move container to workspace next
+bindsym $mod+Shift+period move container to workspace prev
+
+	### -4- 
+
+# reload the configuration file
+bindsym $mod+Shift+r reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $modb+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $modb+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+        bindsym $mod+z resize shrink width 5 px or 5 ppt
+        bindsym $mod+u resize grow height 5 px or 5 ppt
+        bindsym $mod+i resize shrink height 5 px or 5 ppt
+        bindsym $mod+o resize grow width 5 px or 5 ppt
+
+bindsym $mod+udiaeresis gaps inner current plus 5
+bindsym $mod+Shift+udiaeresis gaps inner current minus 5
+bindsym $mod+adiaeresis gaps outer current plus 5
+bindsym $mod+Shift+adiaeresis gaps outer current minus 5
+bindsym $mod+0 gaps inner current set 25 ; gaps outer current set 0
+bindsym $mod+dead_acute gaps inner current set 0; gaps outer current set 0
+
+#bar {
+	#position top
+	#separator_symbol "|"
+	#colors {
+	#separator #ffffff
+	#statusline #ffffff
+	#background #000000
+	#}	
+	#status_command conkystatusbar
+	#font pango:dina:mono 11
+	#strip_workspace_numbers yes
+#}
+
+# Autostart
+exec setxkbmap -layout de -option caps:escape
+exec xcompmgr
+exec firefox https://music.amazon.de/my/albums
+exec feh --randomize --bg-fill /home/ssnape/Pictures/Wallpaper/
+exec st -n math -f mono:pixelsize=17 -e R -q
+#exec i3-msg 'workspace 1:work'
+exec_always --no-startup-id launchpolybar
+
+#Colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #0C85E2 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #AB2B2B #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+
+
+#Windows
+for_window [class="^.*"] border pixel 2
+# makes i3 crash ??? #
+#for_window [class=_focused_] border pixel 1
+gaps inner 25
+#gaps outer 11

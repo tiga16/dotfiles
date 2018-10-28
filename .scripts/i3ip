@@ -1,0 +1,3 @@
+# wlan ip:echo $(ifconfig|grep inet|grep broadcast|sed s/inet//|awk '/192.168/ {print $1;}';)
+#public ip:
+echo $(dig +short myip.opendns.com @resolver1.opendns.com)

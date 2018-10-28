@@ -1,0 +1,12 @@
+cff	~/.scripts/folders
+cfc	~/.scripts/configs
+cfb	~/.bashrc
+cfv	/etc/vimrc
+cfr	~/.config/ranger/rc.conf
+cfi	~/.config/i3/config
+cfC	~/.config/conkystatus/conkyrc
+cfib	~/.config/i3blocks/config
+cfp	~/.config/polybar/config
+cfq	~/.config/qutebrowser/config.py
+cfd	~/.Xdefaults
+cfM	~/.config/mpd/mpd.conf

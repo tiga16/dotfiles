@@ -1,0 +1,3 @@
+QUALITY=$(grep wlp4s0  /proc/net/wireless | awk '{print int($3 * 100 / 70) }')
+echo $QUALITY
+
