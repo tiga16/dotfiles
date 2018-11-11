@@ -1,0 +1,50 @@
+ set smartcase " Search gets case sensitve when uppercase Letter is present
+ syntax enable
+ set title
+ set nocompatible
+ set autoread
+ set confirm
+ set history=255
+ set number
+ set relativenumber
+
+ colorscheme slate
+ highlight LineNr ctermfg=grey ctermbg=green
+
+ "Shortcuts
+
+ let mapleader = " "
+
+ map! <C-a> <Esc>:w<CR>
+ map <leader>a :w<CR>
+ map <leader>q :q<CR>
+ map <leader><leader> /<++><CR>4dli
+ map <leader>o o<Esc>
+ map <leader>O O<Esc>
+ map <leader>b :buffer
+ map <leader>B :sbv
+ map <leader>h :bnext<CR>
+ map <leader>H :bprevious<CR>
+ map <leader>n :ls<CR>
+ nnoremap <C-z> :vertical resize -5<cr>
+ nnoremap <C-u> :resize +5<cr>
+ nnoremap <C-i> :resize -5<cr>
+ nnoremap <C-o> :vertical resize +5<cr>
+
+ nmap <leader>ä :TagbarToggle<CR>
+
+ "comment hallo   a       aa
+
+ ino " ""<left>
+ino ' ''<left>
+ino ( ()<left>
+ino [ []<left>
+ino { {}<left>
+ino {<CR> {<CR>}<ESC>O
+"Disabling the arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+
