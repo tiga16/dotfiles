@@ -1,0 +1,5 @@
+[[ $(ps -A|grep polybar) != "" ]] && killall polybar&
+[[ !($(ps -A|grep polybar) != "") ]] && while pgrep -x polybar >/dev/null;do sleep 1; done && polybar top&
+""#killall -q polybar
+#while pgrep -x polybar >/dev/null;do sleep 1; done
+#polybar top&

@@ -25,3 +25,4 @@ mm ~/mnt
 mu ~/mnt/usb
 mh ~/mnt/hdd
 ms ~/mnt/SD
+mS ~/mnt/Server

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+mountpath="/home/ssnape/mnt"
+
+mountplaces="$mountpath/hdd\n$mountpath/hdd2\n$mountpath/SD\n$mountpath/usb\n$mountpath/usb2"
+
+mounts=$(ls /dev/|grep 'sd\|mmcblk'|sed 's/\/dev\///g;s/mmcblk0/mmcblko/g'|awk '/[[:digit:]]/ {print $0}'|sed 's/mmcblko/mmcblk0/g')
+
+mounts=$(echo $mounts|sed 's/ /\n/g')
+
+mounted=$(mount|grep 'sd\|mmcblk'|grep -v cgroup|sed 's/\dev\///g;s/\///g'|awk '{print $1}')
+
+for mount in $mounted; do
+	#if [[ $(echo $mounts|sed 's/'$mount'/jajaj/g'|grep jajaj)!="" ]]; then
+		mounts=$(echo $mounts|sed 's/'$mount'//g')
+		echo $mount $mounts
+	#fi
+done
+mounts=$(echo $mounts|sed 's/  /\n/g')
+
+tomount=$(echo -e "$mounts"|dmenu -p "Which device do you want to mount?")
+#echo $mount
+
+where=$(echo -e "$mountplaces"|dmenu -p "Where do you want to mount /dev/$tomount?")
+#echo $where
+echo $mounts
+
+
+[[ $where!="" && $tomount!="" ]] && sudo mount /dev/$tomount $where
+
+

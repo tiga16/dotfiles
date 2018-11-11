@@ -1,0 +1,17 @@
+#!/bin/bash
+choices='Abort\nPoweroff\nReboot\nHalt\nLockscreen'
+#options='sudo shutdown -P now\nsudo shutdown -r now\nsudo shutdown -h now\necho hallo'
+option=$(echo -e $choices|dmenu -i -p "What do you want?")
+if [[ $option == "Poweroff" ]]; then
+	sudo shutdown -P now
+elif [[ $option == "Reboot" ]];then
+	sudo shutdown -r now
+elif [[ $option == "Halt" ]];then
+	sudo shutdown -h now
+elif [[ $option == "Lockscreen" ]];then
+	lockscreen
+else
+	echo aborted
+fi
+#$option
+

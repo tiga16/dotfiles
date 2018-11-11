@@ -1,3 +1,4 @@
+#!/bin/bash
  #NUM=`cat /sys/class/power_supply/BAT0/capacity` || exit
  #STATUS=`cat /sys/class/power_supply/BAT0/status`
  #
@@ -30,13 +31,15 @@ elif [[ "$(acpi|awk '{print $3}')" = "Charging," && $CHARGE -ge 40 ]]; then
 	STATUS=" "
 elif [[ "$(acpi|awk '{print $3}')" = "Charging," && $CHARGE -ge 20 ]]; then
 	STATUS=" "
-elif [[  $CHARGE -ge 80 ]]; then
+elif [[ $CHARGE -ge 90 ]]; then
+	STATUS=" "
+elif [[  $CHARGE -ge 70 ]]; then
 	STATUS=""
-elif [[  $CHARGE -ge 60 ]]; then
+elif [[  $CHARGE -ge 50 ]]; then
 	STATUS=""
-elif [[  $CHARGE -ge 40 ]]; then
+elif [[  $CHARGE -ge 25 ]]; then
 	STATUS=""
-elif [[  $CHARGE -ge 20 ]]; then
+elif [[  $CHARGE -lt 25 ]]; then
 	STATUS=""
 fi
 
