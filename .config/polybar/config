@@ -4,24 +4,25 @@ height = 22
 bottom=false
 fixed-center=false
 
-background =#0a2929
-foreground =#ffffff
+background =#8a0d0d0d
+foreground =#fff
 
-;underline-size=1
-;underline-color=#ffff00
+dim-value=0.5
+underline-size=1
+underline-color=#ffff00
 
 padding-left=1
 padding-right=1
-module-margin=1
+module-margin=1.5
 
-font-0 = dina:size=15    
-font-1 = FontAwesome:size=11
-font-2 = FontAwesome5Free:style=Solid:pixelsize=10:antialias=false;3 
+font-0 = Inconsolata:size=12:weight=bold;3
+font-1 = FontAwesome:size=12;3
+font-2 = FontAwesome5Free:style=Solid:pixelsize=10:antialias=false;3
 font-3 = FontAwesome5Brands:style=Solid:pixelsize=10:antialias=false;3
 
 modules-left = i3
 modules-center =
-modules-right = volume wifi weather battery date
+modules-right = wifi weather brightness volume battery date
 
 wm-name = "i3"
 
@@ -30,7 +31,7 @@ locale = de_DE.UTF-8
 ;tray-position=center
 ;tray-detached=true
 ;tray-maxsize=40
-;tray-transparent=true
+;tray-transparent=false
 ;tray-background = #404040
 ;tray-padding = 0
 ;tray-offset-x = 0
@@ -84,6 +85,8 @@ ws-icon-1 = 2:work2;>_
 ws-icon-2 = 3:pacman; 
 ws-icon-3 = 4:web;
 ws-icon-4 = 5:rnd;
+ws-icon-5 = 6:work3;>_
+ws-icon-6 = 7:work4;>_
 
 format = <label-state> <label-mode>
 
@@ -101,18 +104,26 @@ type=custom/script
 exec=i3wifi
 interval=5
 label-foreground=#ccff33
+lable-click-right=nm-connection-editor
 
 [module/weather]
 type=custom/script
 exec=i3weather
 interval=450
+label-foreground=#33ffcc
 
 [module/volume]
 type=custom/script
 exec=i3volume
 interval=0.3
+label-foreground=#99b3ff
 
 [module/battery]
 type=custom/script
 exec=i3battery
 interval=2
+
+[module/brightness]
+type=custom/script
+exec=i3brightness
+interval=0.3

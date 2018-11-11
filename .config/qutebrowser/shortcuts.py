@@ -21,3 +21,4 @@ config.bind(";mm", "set downloads.location.directory ~/mnt ;; hint links downloa
 config.bind(";mu", "set downloads.location.directory ~/mnt/usb ;; hint links download")
 config.bind(";mh", "set downloads.location.directory ~/mnt/hdd ;; hint links download")
 config.bind(";ms", "set downloads.location.directory ~/mnt/SD ;; hint links download")
+config.bind(";mS", "set downloads.location.directory ~/mnt/Server ;; hint links download")
